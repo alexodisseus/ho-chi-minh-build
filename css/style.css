@@ -1,0 +1,97 @@
+# Empty CSS file for your own CSS
+
+html body div{
+	border: solid;
+}
+
+.primario{
+	border: solid;
+}
+
+
+/* Reset básico */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.5em;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+header .user-settings {
+    display: flex;
+    gap: 10px;
+}
+
+/* Container principal */
+.container {
+    display: flex;
+}
+
+.toolbar {
+    width: 200px;
+    background: #f4f4f4;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+}
+
+.design-area {
+    flex: 1;
+    background: #eaeaea;
+    
+    border-right: 1px solid #ddd;
+}
+
+.properties-panel {
+    width: 300px;
+    background: #f4f4f4;
+    padding: 20px;
+}
+
+footer {
+    background: #333;
+    color: #0ff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+
+}
+.guide-structure {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.guide-structure h3 {
+    margin-top: 0;
+}
+
+.guide-structure p {
+    margin: 0;
+}
+
