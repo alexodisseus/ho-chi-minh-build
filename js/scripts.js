@@ -21,7 +21,7 @@ let currentId = 0; // Variável para gerenciar IDs únicos
 
 // pega a janela de design da pagina
 let design = $('#design'); 
-let localizacao = 0;
+let localizacao_item = 0;
 
 // Essa função pega o elemento clicado e manda pra função add_elemento
 $(document).ready(function() {
@@ -33,7 +33,7 @@ $(document).ready(function() {
         $('.design-area *').on('click', function() {
             var elemento = $(this);
             select_elemento(elemento);
-            console.log(elemento);
+
         });
     });
 });
@@ -80,7 +80,7 @@ function createElementHTML(elemento) {
         case 'a':
             return `<${elemento.tipo} id="${elemento.id}" href="#">${elemento.tipo}</${elemento.tipo}>`;
         case 'img':
-            return `<div><${elemento.tipo} src="/imagem.png" id="${elemento.id}"></div>`;
+            return `<${elemento.tipo} src="/imagem.png" id="${elemento.id}">`;
         case 'input':
             return `<${elemento.tipo} id="${elemento.id}" value="${elemento.tipo}">`;
         default:
@@ -93,15 +93,48 @@ function monta_note(elemento) {
     const tipoElemento = dicionario.get(elemento);
     
     // Crie um novo objeto com ID único
+    if (localizacao_item == 0){
+        loc = null
+    }else {
+        loc = localizacao_item;
+    }
+
+
     return {
         tipo: tipoElemento.tipo,
-        id: currentId++ // Incrementa e atribui o ID
+        id: currentId++,
+        localizacao : loc
     };
 }
 
 function select_elemento(elemento) {
-    localizacao = elemento.id; // Atualiza para o ID do elemento selecionado
+
+    localizacao = elemento.attr('id'); 
+    console.log("Selected Element ID: " + localizacao);
+
+
+    $('.toolbar-item-propriedades').empty();
+    const container = document.getElementById('toolbar-item-propriedades');
+
+    localizacao_item = localizacao;
+
+
+    const selectedElement = elementos.find(e => e.id == localizacao); // Comparação não rigorosa
+
+    if (selectedElement) {
+
+
+        let htmlContent = `<div>Tipo: ${selectedElement.tipo}</div>`;
+        htmlContent += `<div>ID: ${selectedElement.id}</div>`;
+        htmlContent += `<div>localização: ${selectedElement.localizacao}</div>`;
+        htmlContent += `<button onclick="edit_elemento(${selectedElement.id})">Editar</button>`;
+        container.innerHTML = htmlContent;
+
+    } else {
+        console.log("Elemento não encontrado");
+    }
 }
+
 
 function add_elemento(elemento) {
     const node = monta_note(elemento);
@@ -114,3 +147,18 @@ function add_elemento(elemento) {
         console.log(`${elementos[i].id} - id`);
     }
 }
+
+
+
+function edit_elemento(elemento) {
+    
+    const selectedElement = elementos.find(e => e.id == elemento); // Comparação não rigorosa
+
+    if (selectedElement) {
+        alert(selectedElement.tipo+ " asd"+selectedElement.id);
+
+    } else {
+        console.log("Elemento não encontrado");
+    }
+}
+
